@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ragdoll.local/schema/project-history/conversation.schema.json",
+  "title": "Ragdoll Project Conversation",
+  "type": "object",
+  "required": ["schema_version", "conversation_id", "project_id", "created_at", "updated_at", "title"],
+  "properties": {
+    "schema_version": {"const": 1},
+    "conversation_id": {"type": "string", "minLength": 1},
+    "project_id": {"type": "string", "minLength": 1},
+    "created_at": {"type": "string", "format": "date-time"},
+    "updated_at": {"type": "string", "format": "date-time"},
+    "title": {"type": "string"},
+    "workspace": {"type": ["string", "null"]},
+    "ide": {"type": ["string", "null"]},
+    "provider": {"type": ["string", "null"]},
+    "parent_conversation_id": {"type": ["string", "null"]},
+    "forked_at_seq": {"type": ["integer", "null"], "minimum": 1}
+  },
+  "additionalProperties": false
+}

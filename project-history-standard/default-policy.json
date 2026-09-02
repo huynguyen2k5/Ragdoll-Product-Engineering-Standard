@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "retention": "indefinite",
+  "storage": "local",
+  "auto_delete": false,
+  "cloud_sync": false,
+  "telemetry": false,
+  "network_default": "deny",
+  "project_scope_default": "current_project",
+  "secret_persistence": "redact",
+  "semantic_index": "optional",
+  "canonical_store": "append_only_jsonl",
+  "search_index": "sqlite_fts5_rebuildable",
+  "uninstall_preserves_history": true
+}
