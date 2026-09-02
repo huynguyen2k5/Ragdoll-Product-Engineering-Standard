@@ -1,0 +1,30 @@
+schema_version: 1
+project:
+  name: Ragdoll Product Engineering Standard
+  slug: ragdoll-product-engineering-standard
+context_standard:
+  id: ragdoll-context-standard
+  registry: context-standard/registry.yaml
+status: MAINTAINED
+active_domains:
+  software-engineering:
+    version: 1.1.0
+    path: software-engineering
+    status: active
+project_history_standard:
+  path: project-history-standard/
+  local_data_default: ~/.ragdoll
+  retention_default: indefinite
+source_of_truth:
+  universal_engineering_rules: references/
+  public_context_protocol: context-standard/
+  project_specific_context: project-context/
+  project_history_contract: project-history-standard/
+  project_history_runtime_data: ~/.ragdoll
+provenance_policy:
+  classes:
+    - OBSERVED
+    - DECLARED
+    - INFERRED
+    - UNDECIDED
+  rule: Inferred claims must not silently become observed or declared.
