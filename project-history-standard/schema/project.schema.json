@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ragdoll.local/schema/project-history/project.schema.json",
+  "title": "Ragdoll Local Project Identity",
+  "type": "object",
+  "required": ["schema_version", "project_id", "name", "created_at", "updated_at", "workspaces", "git_remotes"],
+  "properties": {
+    "schema_version": {"const": 1},
+    "project_id": {"type": "string", "minLength": 1},
+    "name": {"type": "string", "minLength": 1},
+    "created_at": {"type": "string", "format": "date-time"},
+    "updated_at": {"type": "string", "format": "date-time"},
+    "workspaces": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+    "git_remotes": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+    "git_root_commit": {"type": ["string", "null"]}
+  },
+  "additionalProperties": false
+}
