@@ -1,0 +1,4 @@
+interface:
+  display_name: "Ragdoll Product Engineering Standard"
+  short_description: "Local-first engineering rules, project context, and project history for AI coding agents"
+  brand_color: "#1F2937"

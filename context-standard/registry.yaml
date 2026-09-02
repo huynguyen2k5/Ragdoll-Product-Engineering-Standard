@@ -1,0 +1,17 @@
+schema_version: 1
+standard_id: ragdoll-context-standard
+name: Ragdoll Context Standard
+description: Domain-oriented public context protocol for project knowledge used by humans and AI agents.
+project_context_root: project-context
+manifest_name: context-manifest.yaml
+evidence_classes:
+  - OBSERVED
+  - DECLARED
+  - INFERRED
+  - UNDECIDED
+domains:
+  software-engineering:
+    name: Software Engineering Context
+    version: 1.1.0
+    status: stable
+    manifest: context-standard/context-domains/software-engineering/domain.yaml

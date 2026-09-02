@@ -1,0 +1,40 @@
+schema_version: 1
+domain_id: software-engineering
+name: Software Engineering Context
+version: 1.1.0
+status: stable
+purpose: >-
+  Describe the project, codebase architecture, repository-specific engineering
+  conventions, AI workflow, implementation state, and UI implementation context
+  required for reliable software-engineering work.
+context_root: project-context/software-engineering
+canonical_files:
+  - project-overview.md
+  - architecture.md
+  - code-standards.md
+  - ai-workflow-rules.md
+  - progress-tracker.md
+  - ui-context.md
+load_policy:
+  core:
+    - project-overview.md
+    - architecture.md
+    - code-standards.md
+    - progress-tracker.md
+  conditional:
+    workflow_or_process:
+      - ai-workflow-rules.md
+    ui_or_design_implementation:
+      - ui-context.md
+provenance:
+  required_classes:
+    - OBSERVED
+    - DECLARED
+    - INFERRED
+    - UNDECIDED
+rules:
+  - The six-file contract belongs to the software-engineering domain only.
+  - Future context domains may define different canonical files and load policies.
+  - Project-specific facts must not become universal Ragdoll rules without separate evidence governance.
+  - Unknown material facts remain UNDECIDED instead of being guessed to fill a template.
+  - Project History is a separate subsystem and must not become a seventh canonical Software Engineering context file.
