@@ -1,0 +1,16 @@
+{
+  "candidate": "example-tool",
+  "license_blocker": false,
+  "security_blocker": false,
+  "compatibility_blocker": false,
+  "scores": {
+    "problem_fit": 5,
+    "project_health": 4,
+    "security_supply_chain": 4,
+    "technical_compatibility": 5,
+    "docs_tests": 4,
+    "integration_cost": 4,
+    "ecosystem_adoption": 3,
+    "reversibility": 5
+  }
+}

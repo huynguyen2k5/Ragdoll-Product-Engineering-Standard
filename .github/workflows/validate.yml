@@ -1,0 +1,90 @@
+name: Validate
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: validate-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  core-tests:
+    name: Core ${{ matrix.os }} / Python ${{ matrix.python }}
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+        python: ["3.11", "3.12", "3.13"]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+          cache: pip
+
+      - name: Install package
+        run: python -m pip install .
+
+      - name: Run unit and integration tests
+        run: python -m unittest discover -s tests -v
+
+      - name: Installed CLI smoke test
+        shell: bash
+        run: |
+          ragdoll --version
+          cd "${RUNNER_TEMP}"
+          python -c "from ragdoll.context_runtime import compile_runtime_context; print('installed-package-import-ok')"
+          tmp_home="${RUNNER_TEMP}/ragdoll-smoke-${{ matrix.python }}"
+          export RAGDOLL_HOME="$tmp_home"
+          ragdoll init
+          ragdoll doctor
+
+  repository-contract:
+    name: Repository contract
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Validate Ragdoll repository
+        run: python scripts/validate_skill_pack.py
+
+      - name: Validate Ragdoll Project Context
+        run: python scripts/validate_project_context.py .
+
+      - name: Smoke-test Project Context generation
+        run: |
+          python scripts/generate_project_context.py . --output /tmp/ragdoll-project-context
+          python scripts/validate_project_context.py /tmp/ragdoll-project-context
+
+      - name: Smoke-test candidate evaluator
+        run: python scripts/evaluate_candidate.py scripts/candidate.example.json
+
+      - name: Compile Python runtime and helpers
+        run: python -m compileall -q ragdoll scripts tools tests
+
+      - name: Validate POSIX installer syntax
+        run: |
+          sh -n install.sh
+          sh -n uninstall.sh
+
+      - name: Build deterministic release artifact
+        run: python scripts/build_release.py --output /tmp/ragdoll-dist

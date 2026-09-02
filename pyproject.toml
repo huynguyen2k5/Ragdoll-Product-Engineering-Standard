@@ -1,0 +1,43 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ragdoll-product-engineering-standard"
+version = "1.0.0"
+description = "Local-first engineering standard, project context, durable project history, and production local API for AI-assisted product engineering"
+readme = "README.md"
+# Intentionally no license field yet: the owner has not selected the project's
+# open-source license. See README release checklist; do not infer one silently.
+requires-python = ">=3.11"
+authors = [
+  {name = "Ragdoll Project"}
+]
+keywords = ["ai", "coding-agent", "developer-tools", "local-first", "project-context", "project-history"]
+classifiers = [
+  "Development Status :: 5 - Production/Stable",
+  "Environment :: Console",
+  "Intended Audience :: Developers",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Topic :: Software Development",
+]
+dependencies = []
+
+[project.urls]
+Repository = "https://github.com/huynguyen2k5/Ragdoll-Product-Engineering-Standard"
+Issues = "https://github.com/huynguyen2k5/Ragdoll-Product-Engineering-Standard/issues"
+
+[project.scripts]
+ragdoll = "ragdoll.cli:main"
+ragdoll-server = "ragdoll.server:main"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["ragdoll*", "tools*"]
+namespaces = true
+
+[tool.setuptools.package-data]
+ragdoll = ["py.typed"]
